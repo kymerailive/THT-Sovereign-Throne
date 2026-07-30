@@ -56,12 +56,14 @@ tbody tr:nth-child(odd){background:rgba(255,255,255,.02)}
     <span class="brand">Sovereign Throne <span class="tide">· The Hollow Tide</span></span>
     <button class="tabbtn on" data-t="team" onclick="pick('team')">Team</button>
     <button class="tabbtn" data-t="players" onclick="pick('players')">Players</button>
+    <button class="tabbtn" data-t="base" onclick="pick('base')">Base</button>
+    <button class="tabbtn" data-t="npcs" onclick="pick('npcs')">NPCs</button>
     <span class="updated" id="updated"></span>
   </header>
   <div id="main"></div>
 </div>
 <script>
-const ENC={salt:"iiBhREJ5Qz9Ow9SXDVApJA==",iv:"iLayelG8y9dITwKy",ct:"effub1XYpPtlE1plZDjZmIhlbKHc1cAX6q1yibgKqjjvogJIX6/A6Y6Jg18R5JxkwJwff6X5LaeO85FtDAY1qms0N3yXyVQWnD8D1Xuj38CZ7wVV3zhU3esscPOa+1HV6/B09zR/CuLLM9F+2cU0f8uWtoPsoduJ20sEfa5E4vZ9g3wF4f3KpEznLzJEYdjcNMeLXeEgGZvmxcoveRdL1+JXoW2E1ryEcllaGAb3UhvryDYx4ryhvnNvdeXubuiZ9C4NI+RbEFeluUCFA1TC8rhdGn65d70TIQPLGSLFeVNXW8aKRm/rFt9FENaj9nafyQ/OYc+FWwsuSSJqFDiau90Tjp/vOcEpWtl2nQguthOjlelnJSZcVPZe5Ni32IEhfQ+RLz3tV7EduEcFbxivPjWCy9ce0DTQ7x2Pz0Q9P1wQOxVoj0DXCpHYLWubVeWShLmb55cWoUvqL9xsWb825ZHpJJs6/xBLKYrN7p0CbIJldaWwscWufV1OywLogP6CWaJAWtNX/xr0+MYlCAXVDpJ/rjGLNbmYyIA+7cMEwluAEMiGqMv8ThZm/K8y8uN2d+mbuIdsXUUmayGEiKuYCzBPH2w0Rk20Eh2JTML0cntVm2NhZmvLV2FBVpkoYyaZ1NTK+aohsnDuCUT1vGueGYOb1qivqRPV+/A1NgifwhyR7Bo8MhLVBq/oV8/tZH8/Hm2XLHqNidGoVkgzvnK7OJBLnyg5e7oMCBLH7YkNX7y6Q4iu0+Uwxbyb10IRQSueElWSqejbUZT+m+EQYMFP7o6jAbZre4/ke2Y5Kh7+t1Z2SktgEIuCc+2rQPIe6h+/UtGhrsW4dwohpLEJyPOVKKSTppb6sKYntPFwFD3omwmVkhpgL1sYCyJrlkmb/Kaog8s2YlUOV3lTgfpuo7bQHediqd2njuFcVw1opOOZI1+jub7mHwpW/eGJ78j4ABV9vcCf8On/GoKdn4kDof1jQcCSn8y6RqpClfOANdjOtugVn0C1OJzdvSfZ+meRwiXe94YtnxdWsGq93qNK1WAdJIZ08zmkRgEkRpRkCR6Zqy6XsaRkCTkPcPKBkE19lAWmkhXOk2OEDvnsLSNSqxB6/rJ7kxUt681DWteemkO+MrRCYzCazbfwmWJPXwhR3dIxV2PHa9MmfoDCtURZxEFaOJ72YPUZ/dJwVo2CtI6upiZFRZKa3DZEHY62zzHd6dFztKXjP00SkKErEs4uBqbBqoNSESz3Gf1sp43bNoYxl2AhQ3IRdSzepR+L+5N3T9knviMFzJrmHAxZdgCdyilCjgwLqcfoc+M/P/Qbypy4gZrFXnTGPg+XA2eiOetEEkbtIqD60JptqN4mzH5AaZkBDlcNUBOKujqUere+hRpbva8IBIrNgNKdBzBx/fj/DRP3NruQ3U04mvhbrAn4rmsqFHQ72RJFR43LDv/iyfrUE44Ghc4CTrGNNcEhfm1OoDWkvACzy4QqG3VzGFI/F1J6xnzgWARuVkz7b/MKlzTAg26NBsXRfsoBcNOCB6Yt9dxzfKzpfeHWRWucWUIlpOe/c5PEhCazsZQ0veesvjd7QAddWXRHUgdXWjrtMWrTw8gDaGDaJeyUnaL0bKnIz/RLtPTQVfDWJAcsiGucMRgAx95I1gPGzvEemVQGtebwHusPqVi/DWBHVJTgdiZxjs4JoNbEcm8mppbIaswBBaY5M1RyGlvA+qQpFfi21BXHSD8fl5vetuuNitoYEPAyAUe/DyLvE338PzPP6zh+TEUbP+DR76XyrHYC4vM+3qh5FiwQWDs6kFPg49UJqUoNlo68cnTOIv+xwejZItFmFN56t/RdIrxbqEktkzz0GFZdp9qnFMmNcyZpsW8dtEccNqRnWvcT7qtBK2pGj4vePwcJdJEA8VlShFNWBeolxvj3tZ3EbPRITk3vze6/XbQFEb0rHTDsVRwo7atOSOCmoDrb34q/98nTiTeNq0uctgUpDXsJ+sJKhnZcm1DXCNwpES0jEc+A6YGtWSxlXMxuOD968lA+7pXGgeK0TFpiUEOTa8nTdKzAee6r0193mgQReTXiVSj9QABd1upLTHEO3bAQlWq4j98m3WE+xo0U9pMdLjhT4QHze9dGK+usW/acWbQblbHOJw4ytF7xQ8Cp1a1ITCnp9uDPVMsTU27a3EwRaAlVtgnI7rxWH0Kgn9FPNYKbkXzgSkfv9ukZ9qkjR831bi3bagX6crWwTPBQZ7KyFEZNgLMKsKxELSwsF5Tw3gzH",iter:310000};
+const ENC={salt:"dUV/bWz1gRlGbmIT530K9A==",iv:"kFUiIqNEmub52fAY",ct:"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",iter:310000};
 let DATA=null;
 const b64buf=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 async function unlock(){
@@ -104,6 +106,30 @@ function render(){
       <tbody>${roster}</tbody></table>
       <h2>Team stash</h2><table><thead><tr><th>Item</th><th>Qty</th><th>About</th></tr></thead>
       <tbody>${stash}</tbody></table>`;
+  }else if(tab==='base'){
+    const b=DATA.base;
+    if(!b){m.innerHTML='<h1>Base</h1><p class="muted">No base on record for this team — yet.</p>';return}
+    const hales=(b.houses||[]).map(h=>`<div class="pcard">
+      <h2>${esc(h.name)}${h.function?' <span class="muted" style="font-size:.85rem">— '+esc(h.function)+'</span>':''}</h2>
+      ${(h.npcs||[]).length?'<div class="pmeta">'+h.npcs.map(n=>'<b>'+esc(n)+'</b>').join(' · ')+'</div>':''}
+      ${h.staff?'<div class="pmeta muted">Also: '+esc(h.staff)+'</div>':''}
+    </div>`).join('');
+    m.innerHTML=`<h1>${esc(b.name)}</h1>
+      ${b.status?`<div class="pmeta">📍 <b>${esc(b.status)}</b></div>`:''}
+      ${b.steward?`<div class="pmeta">Steward: <b>${esc(b.steward)}</b></div>`:''}
+      ${b.desc?`<p>${esc(b.desc)}</p>`:''}
+      <h2>The hale</h2>${hales||'<p class="muted">No houses recorded.</p>'}`;
+  }else if(tab==='npcs'){
+    if(!(DATA.npcs||[]).length){
+      m.innerHTML='<h1>NPCs</h1><p class="muted">No NPCs on record for this team — yet.</p>';return}
+    m.innerHTML='<h1>NPCs</h1>'+DATA.npcs.map(n=>`<div class="pcard">
+      <h2>${esc(n.name)}</h2>
+      <div class="pmeta">${(n.titles||[]).length?esc(n.titles.join(', '))+' · ':''}
+        ${n.affiliation?esc(n.affiliation)+' · ':''}
+        Post: <b>${esc(n.post)}</b>${n.function?' ('+esc(n.function)+')':''}</div>
+      ${n.gif?`<img src="${esc(n.gif)}" alt="" loading="lazy"
+        style="max-height:120px;border-radius:8px;margin-top:6px">`:''}
+    </div>`).join('');
   }else{
     m.innerHTML='<h1>Players</h1>'+DATA.players.map(p=>{
       const sk=Object.entries(p.skills||{}).filter(e=>e[1]>0)
