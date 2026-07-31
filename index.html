@@ -113,6 +113,21 @@ font-weight:800;cursor:pointer;font:inherit;box-shadow:0 4px 14px rgba(124,92,25
 .npclink{color:var(--text);text-decoration:none;border-bottom:1px dotted var(--faint)}
 .npcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
 .npcgrid .pcard{margin:0}
+
+/* ---- the forge ---- */
+.pcard label{display:block;margin:12px 0 4px;font-size:13px;color:#9fb0c9}
+.pcard input[type=text],.pcard select,.pcard textarea{
+  width:100%;box-sizing:border-box;padding:9px 11px;border-radius:9px;
+  background:#0d1420;border:1px solid #24344b;color:#e8eef7;
+  font:inherit;font-size:14px}
+.pcard textarea{resize:vertical;min-height:64px}
+.pcard input:focus,.pcard select:focus,.pcard textarea:focus{
+  outline:none;border-color:#4d7fb8}
+#f-send{margin-top:14px;padding:11px 20px;min-height:44px;border-radius:10px;
+  border:none;background:#2f6f4f;color:#fff;font:inherit;font-size:14px;
+  font-weight:600;cursor:pointer}
+#f-send:disabled{opacity:.6;cursor:default}
+.ok{margin-top:10px;color:#6ee7a8;font-size:13px}
 </style></head><body>
 <div id="gate"><div class="gatecard">
   <h1>Sovereign Throne</h1>
@@ -128,12 +143,14 @@ font-weight:800;cursor:pointer;font:inherit;box-shadow:0 4px 14px rgba(124,92,25
     <button class="tabbtn" data-t="players" onclick="pick('players')">Players</button>
     <button class="tabbtn" data-t="base" onclick="pick('base')">Base</button>
     <button class="tabbtn" data-t="npcs" onclick="pick('npcs')">NPCs</button>
+    <button class="tabbtn" data-t="forge" id="forgetab" style="display:none"
+            onclick="pick('forge')">Forge</button>
     <span class="updated" id="updated"></span>
   </header>
   <div id="main"></div>
 </div>
 <script>
-const ENC={salt:"E44XlVDLFrR3KpCq9LdgTA==",iv:"86V/xYQ5CHGvdXA3",ct:"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",iter:310000};
+const ENC={salt:"TcP/waqz/iMTfe9XyTYa1w==",iv:"ehViho/3pI32DDTw",ct:"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",iter:310000};
 let DATA=null,LIVE=null,liveOk=false,lastSig='',tab='team';
 let selHale=null,selNpc=null;
 const BLOBS={};
@@ -153,6 +170,9 @@ async function unlock(){
   }catch(e){err.textContent='That passcode does not open this tide.';return}
   document.getElementById('gate').style.display='none';
   document.getElementById('app').style.display='block';
+  // The Forge tab exists only for a team that has dealt with Kawelo. Teams who
+  // haven't never see it — the forge is earned in fiction, not advertised.
+  if((DATA.forge||{}).unlocked)document.getElementById('forgetab').style.display='';
   render();
   startLive();
 }
@@ -334,6 +354,8 @@ function render(){
           tab='base';selNpc=c.key;selHale=null;render();
           document.querySelectorAll('.tabbtn').forEach(x=>x.classList.toggle('on',x.dataset.t==='base'))};
       }});
+  }else if(tab==='forge'){
+    m.innerHTML='<h1>The Forge</h1>'+forgeForm();
   }else{
     m.innerHTML='<h1>Players</h1>'+DATA.players.map(p=>{
       const sk=Object.entries(p.skills||{}).filter(e=>e[1]>0)
@@ -348,6 +370,70 @@ function render(){
         <div class="pmeta">💰 ${money(p.wallet)}${sk?' · 🎓 '+esc(sk):''}</div>
         <table><thead><tr><th>Item</th><th>Qty</th><th>About</th></tr></thead><tbody>${inv}</tbody></table>
         </div>`;}).join('');
+  }
+}
+
+/* ---- the forge ----
+   Buy a card from Kawelo, author the NPC here, a dev rules on it. The form
+   shows only the fields that card pays for, and only the jobs still open. */
+function forgeRarity(){
+  const s=document.getElementById('f-rarity');
+  return s?s.value:'common';
+}
+function forgeForm(){
+  const F=DATA.forge||{}, r=forgeRarity();
+  const fields=(F.fields||{})[r]||[];
+  const jobs=(F.jobs||[]).filter(j=>r==='special'||
+      (F.tiers||[]).indexOf(j.tier)<=(F.tiers||[]).indexOf(r));
+  const rows=fields.map(f=>{
+    if(f==='job'){
+      const opts=jobs.map(j=>`<option value="${esc(j.title)}">${esc(j.title)}`
+        +` — ${esc(j.tier)}${j.left!==null&&j.left!==undefined?' ('+j.left+' left)':''}`
+        +`</option>`).join('');
+      return `<label>${esc((F.prompts||{}).job||'Job')}
+        <select id="f-job">${opts||'<option value="">no posts open</option>'}</select></label>`;
+    }
+    const big=['personality','voice','backstory','goal','ability','trait'].indexOf(f)>=0;
+    const p=esc((F.prompts||{})[f]||f);
+    return big?`<label>${p}<textarea id="f-${f}" rows="3"></textarea></label>`
+              :`<label>${p}<input id="f-${f}" type="text"></label>`;
+  }).join('');
+  const face=(F.portrait||[]).indexOf(r)>=0
+    ? `<p class="muted">This card lets you choose their face — hand the picture
+       to a dev when they approve.</p>`
+    : `<p class="muted">The card picks their face from the pool.</p>`;
+  return `<div class="pcard"><h2>Forge an NPC</h2>
+    <p class="muted">${esc((F.blurb||{})[r]||'')}</p>
+    <label>Which card are you spending?
+      <select id="f-rarity" onchange="render()">
+        ${['common','uncommon','rare','legendary','special'].map(x=>
+          `<option value="${x}"${x===r?' selected':''}>${x}</option>`).join('')}
+      </select></label>
+    <label>Your player name<input id="f-player" type="text"
+      placeholder="so the dev knows whose card to take"></label>
+    ${rows}${face}
+    <button id="f-send" onclick="forgeSend()">Send to the devs</button>
+    <div class="err" id="f-err"></div></div>`;
+}
+async function forgeSend(){
+  const F=DATA.forge||{}, r=forgeRarity();
+  const err=document.getElementById('f-err');
+  const body={rarity:r,player:(document.getElementById('f-player')||{}).value||''};
+  ((F.fields||{})[r]||[]).forEach(f=>{
+    const el=document.getElementById('f-'+f);
+    if(el)body[f]=el.value;
+  });
+  body.portrait=(F.portrait||[]).indexOf(r)>=0;
+  const btn=document.getElementById('f-send');
+  if(btn){btn.disabled=true;btn.textContent='Sending…';}
+  try{
+    await api('/api/team/forge-submit',body);
+    err.className='ok';
+    err.textContent='Sent. A dev will confirm your card and make them real.';
+  }catch(e){
+    err.className='err';
+    err.textContent=e.message;
+    if(btn){btn.disabled=false;btn.textContent='Send to the devs';}
   }
 }
 document.addEventListener('DOMContentLoaded',()=>{
