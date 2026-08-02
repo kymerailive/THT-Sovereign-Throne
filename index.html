@@ -142,7 +142,8 @@ font-weight:800;cursor:pointer;font:inherit;box-shadow:0 4px 14px rgba(124,92,25
 .fc-msg.err{color:#e79a9a}
 
 /* ---- forming a squad from the muster ---- */
-.mkrow{margin-top:16px}
+.mkrow{margin:0 0 20px;padding:12px;border-radius:12px;background:#0d1420;
+  border:1px solid #1e2c40}
 .mkrow input{padding:8px 11px;border-radius:9px;background:#0d1420;
   border:1px solid #24344b;color:#e8eef7;font:inherit;font-size:13px;
   margin-right:8px;min-width:200px}
@@ -226,7 +227,7 @@ font-weight:800;cursor:pointer;font:inherit;box-shadow:0 4px 14px rgba(124,92,25
   <div id="main"></div>
 </div>
 <script>
-const ENC={salt:"M5cC4/peUKODV0OmerH2CQ==",iv:"gmvmrjzDZ7JNz3ZW",ct:"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",iter:310000};
+const ENC={salt:"+qJZQSGhWvJBOpwVWGRFoQ==",iv:"H8yMKThn14nXZr5G",ct:"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",iter:310000};
 let DATA=null,LIVE=null,liveOk=false,lastSig='',tab='team';
 let selHale=null,selNpc=null;
 const BLOBS={};
@@ -535,7 +536,7 @@ function squadsBlock(){
   if(!SQ)return`<div class="muster"><h2>Squads</h2><p class="muted">`
     +(sqErr?esc(sqErr):'Reading the muster roll…')+`</p></div>`;
   const cards=(SQ.squads||[]).map(squadCard).join('')
-    ||`<p class="muted">No squads yet. Form one below, then post people to it —
+    ||`<p class="muted">No squads yet. Name one above, then post people to it —
        or pick <b>+ New squad…</b> straight from any NPC's Posting dropdown,
        which does both at once.</p>`;
   return `<div class="muster">
@@ -546,35 +547,26 @@ function squadsBlock(){
     <label class="whorow">Your player name
       <input id="sq-who" type="text" value="${esc(savedWho())}"
              placeholder="so the log knows who gave the order"></label>
-    ${sqErr?'<div class="err">'+esc(sqErr)+'</div>':''}
-    ${cards}
     <div class="mkrow">
-      <button class="linkbtn" id="sq-open">+ Form a squad</button>
-      <span id="sq-mk" style="display:none">
-        <input id="sq-name" type="text" placeholder="e.g. The Salt Line">
-        <button class="gbtn" id="sq-make">Form it</button>
-        <button class="linkbtn" id="sq-cancel">cancel</button>
-      </span>
-      <p class="hint">An empty squad is fine — post people to it from its own
-      list, or from any NPC's Posting dropdown.</p>
-    </div></div>`;
+      <input id="sq-name" type="text" placeholder="Name a new squad — e.g. The Salt Line">
+      <button class="gbtn" id="sq-make">Form a squad</button>
+      <p class="hint">An empty squad is fine. Post people to it from its own
+      list below, or from any NPC's Posting dropdown.</p>
+    </div>
+    ${sqErr?'<div class="err">'+esc(sqErr)+'</div>':''}
+    ${cards}</div>`;
 }
 function wireSquads(m){
   if(!(DATA.squads&&SQ))return;
   m.querySelectorAll('.squad').forEach(wireSquad);
-  const open=m.querySelector('#sq-open'), box=m.querySelector('#sq-mk');
-  if(open)open.onclick=()=>{
-    box.style.display='';open.style.display='none';
-    m.querySelector('#sq-name').focus();
+  const name=m.querySelector('#sq-name'), make=m.querySelector('#sq-make');
+  const form=()=>{
+    const n=(name||{}).value||'';
+    if(!n.trim()){sqErr='Name the squad first.';render();return}
+    sqCall('/api/team/squad',{action:'create',name:n,player:sqWho()});
   };
-  const cancel=m.querySelector('#sq-cancel');
-  if(cancel)cancel.onclick=()=>{box.style.display='none';open.style.display=''};
-  const make=m.querySelector('#sq-make');
-  if(make)make.onclick=()=>{
-    const n=(m.querySelector('#sq-name')||{}).value||'';
-    if(n.trim())sqCall('/api/team/squad',
-      {action:'create',name:n,player:sqWho()});
-  };
+  if(make)make.onclick=form;
+  if(name)name.addEventListener('keydown',e=>{if(e.key==='Enter')form()});
 }
 /* ---- base map geometry (ring fallback = the bot's base_map_view math) ---- */
 function haleXY(h,i,n,cv){
