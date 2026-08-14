@@ -114,6 +114,51 @@ font-weight:800;cursor:pointer;font:inherit;box-shadow:0 4px 14px rgba(124,92,25
 .npcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
 .npcgrid .pcard{margin:0}
 
+/* ================= PHONES =================
+   Owner ruling: every player-facing site has to work on a phone, not just the
+   dev dashboard. This file had ZERO media queries. Most of the layout is
+   already fluid — max-width, auto-fill grids, flex-wrap — so what was actually
+   broken is narrower than it looks: the gutters, the tables, and the touch
+   targets on the base map, which is the one place a player moves an NPC.
+
+   The breakpoint is 720px rather than a device width: that is where the
+   40px of side padding plus a table of four columns stops fitting. */
+@media (max-width:720px){
+  #app{padding:0 12px 90px}
+  header.top{margin:0 -12px;padding:10px 12px;gap:7px}
+  .updated{margin-left:0;flex:1 1 100%;font-size:.74rem}
+  h1{font-size:1.45rem}
+  /* Tables carry six columns on the roster and squad views. They scroll
+     inside their own box so the PAGE never scrolls sideways. */
+  .tscroll{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tscroll table{min-width:520px}
+  .stat{display:block;margin:8px 0;padding:12px 16px}
+  .basedesc{max-width:none}
+  .npcgrid{grid-template-columns:1fr}
+  .npcprof-head{flex-wrap:wrap}
+  .moverow{flex-wrap:wrap}
+  .moverow select{flex:1 1 100%}
+  /* 44px touch minimum. A tab pill was 33px and the hale boxes on the base
+     map are what a player taps to move somebody. */
+  .tabbtn{padding:11px 18px;min-height:44px}
+  .gbtn,.moverow select,.gatecard button,.gatecard input{min-height:44px}
+  /* 16px stops iOS zooming the page the moment the passcode field is
+     focused — on the gate, that is the first thing anyone touches. */
+  .gatecard input,.moverow select,input,select,textarea{font-size:16px}
+  .bhale .hbox{width:44px;height:44px;position:relative}
+  /* The NPC dots stay small so a hale with six of them still reads, but the
+     touchable area around each is the full 44px. This is the one place a
+     PLAYER moves somebody, so it has to answer a thumb. */
+  .bnpc{width:26px;height:26px;font-size:9.5px}
+  .bnpc::before{content:"";position:absolute;left:50%;top:50%;width:44px;
+    height:44px;border-radius:50%;transform:translate(-50%,-50%)}
+  .gatecard{padding:30px 20px}
+  th,td{padding:8px 9px}
+}
+@media (max-width:420px){
+  .tabbtn{flex:1 1 auto;text-align:center}
+}
+
 /* ---- NPC detail: blurb, health, abilities ---- */
 .npcblurb{margin:10px 0 2px;font-size:14px;line-height:1.55;color:#c7d4e6}
 .forgeline{margin-top:2px}
@@ -236,7 +281,7 @@ font-weight:800;cursor:pointer;font:inherit;box-shadow:0 4px 14px rgba(124,92,25
   <div id="main"></div>
 </div>
 <script>
-const ENC={salt:"2+eS3u9oaVKjEQCTlkbLnQ==",iv:"ZpiJr+9tqgMSLM6I",ct:"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",iter:310000};
+const ENC={salt:"tYnJehTMCeF8v2QWd9toWA==",iv:"5Dvls3s/nM+9+dci",ct:"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",iter:310000};
 let DATA=null,LIVE=null,liveOk=false,lastSig='',tab='team';
 let selHale=null,selNpc=null;
 const BLOBS={};
@@ -453,7 +498,7 @@ function squadCard(s){
   const rows=(s.members||[]).map(m=>`<tr data-npc="${esc(m.key)}">
     <td><b>${esc(m.name)}</b>${m.job?'<div class="muted fsm">'+esc(m.job)+'</div>':''}</td>
     <td><select class="sq-role">${roleOptions(m.role)}</select></td>
-    <td class="muted">${m.hp?esc(m.hp)+' HP':''}</td>
+    <td class="muted">${m.hp?esc(m.hp)+' max HP':''}</td>
     <td><button class="linkbtn sq-drop">remove</button></td></tr>`).join('')
     ||'<tr><td colspan="4" class="muted">Nobody posted to this squad yet.</td></tr>';
   const free=(SQ.unassigned||[]).map(n=>
@@ -495,7 +540,7 @@ function squadCard(s){
         <div class="pmeta">${status}</div>
       </div>
     </div>
-    <table class="sqtab"><tbody>${rows}</tbody></table>
+    <div class="tscroll"><table class="sqtab"><tbody>${rows}</tbody></table></div>
     <div class="sqadd">
       <select class="sq-new">${free||'<option value="">everyone is posted</option>'}</select>
       <button class="linkbtn sq-add">post to squad</button></div>
@@ -647,7 +692,7 @@ function npcCard(c,withMove){
     '<li><b>'+esc(a.name)+'</b>'+(a.damage?' <span class="dmg">'+esc(a.damage)+'</span>':'')
     +(a.desc?'<br><span class="muted">'+esc(a.desc)+'</span>':'')+'</li>').join('');
   const vitals=(c.hp||abil)?`<div class="vitals">
-    ${c.hp?'<div class="hp"><span class="k">Health</span><b>'+c.hp+'</b></div>':''}
+    ${c.hp?'<div class="hp"><span class="k">Constitution</span><b>'+c.hp+'</b></div>':''}
     ${abil?'<div class="abils"><span class="k">Abilities</span><ul>'+abil+'</ul></div>':''}
     </div>`:'';
   const inSquad=DATA.squads&&SQ&&liveOk&&!!squadOf(c.key);
@@ -757,10 +802,10 @@ function render(){
       <div><span class="stat goldv"><div class="v">${money(DATA.treasury)}</div><div class="k">Team Bank</div></span>
       <span class="stat"><div class="v">${DATA.players.length}</div><div class="k">Players</div></span>
       <span class="stat"><div class="v">${DATA.stash.length}</div><div class="k">Stash items</div></span></div>
-      <h2>Roster</h2><table><thead><tr><th>Name</th><th>Pronouns</th><th>Label</th><th>Titles</th></tr></thead>
-      <tbody>${roster}</tbody></table>
-      <h2>Team stash</h2><table><thead><tr><th>Item</th><th>Qty</th><th>About</th></tr></thead>
-      <tbody>${stash}</tbody></table>`;
+      <h2>Roster</h2><div class="tscroll"><table><thead><tr><th>Name</th><th>Pronouns</th><th>Label</th><th>Titles</th></tr></thead>
+      <tbody>${roster}</tbody></table></div>
+      <h2>Team stash</h2><div class="tscroll"><table><thead><tr><th>Item</th><th>Qty</th><th>About</th></tr></thead>
+      <tbody>${stash}</tbody></table></div>`;
   }else if(tab==='base'){
     renderBase(m);
   }else if(tab==='npcs'){
@@ -794,7 +839,7 @@ function render(){
         ${p.affiliation?' · '+esc(p.affiliation):''}
         ${(p.titles||[]).length?' · '+esc(p.titles.join(', ')):''}</div>
         <div class="pmeta">💰 ${money(p.wallet)}${sk?' · 🎓 '+esc(sk):''}</div>
-        <table><thead><tr><th>Item</th><th>Qty</th><th>About</th></tr></thead><tbody>${inv}</tbody></table>
+        <div class="tscroll"><table><thead><tr><th>Item</th><th>Qty</th><th>About</th></tr></thead><tbody>${inv}</tbody></table></div>
         </div>`;}).join('');
   }
 }
