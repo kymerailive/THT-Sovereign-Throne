@@ -281,7 +281,7 @@ font-weight:800;cursor:pointer;font:inherit;box-shadow:0 4px 14px rgba(124,92,25
   <div id="main"></div>
 </div>
 <script>
-const ENC={salt:"dHvibmvz0Pv/SDp0l3ZRyw==",iv:"TPgTtUB2qqLbTa+k",ct:"jVnFNUrsflFb6oeBo+DLS10NxIVNm9eRoVqm4/tbCXxE56upHtIPeFLmVH7dSdDMIWdlyW0WsbxQp8IMaTLoUSx915Vbbq6emwaemVl2qhX/Gj8Nf+cP2Z1QpErwJ8Z6WVb/z/KGLL1t5wBsXBVhu3V5KRp+lGel4oUgskNgdhIqLSqmD7KDMTfErTR1tSnPGYiMmD89vD6OOGS+MN77P7oqV4svQWhIoOYUJPUdbcVn6YfF1GW5IWN8Ee7fizfxJo9/ZcUKGP+q9Nph5a4+iJl3oYGyloqI8B2kOjDY+DGXBuug3IaKWBURPo/miPnyvlu7nNjby9avquO0UtjlYntXKHQweqtaT9WNIBlR",iter:310000};
+const ENC={salt:"IAOhpcy/cqGTUqWGd456/A==",iv:"ruoOtMYzRlpsZXeM",ct:"eC1BNW6xKrK7e5dqelBkZY6eU+tb2poI1nUvmQHE6FMPEcrsTrGfYlwgWR2rMStpOk34q8B8zARi385j28KzPqpPjQPZCXOCVkoWJnU3GwHAIdil1+OLPmjyu3bSkazYnYJV4H74ChhEJulizdyp3pokbdTh+6Ppi+WAIBx15EWhte0cUYb/Hw2l0jkPQVPEtgRCZZO2FlZSmNyhJoD9yo/PVpzZ6AmOSS3l2+B5vP7UAeikG5efw/3UyCxT+6LW6zR2YE4JCGX+kE//m/ji4jz00wb/ZGYXayQILExhrioNQPiYsvFUU68dBimmh/JwghQd5LRG2RkYKz864Ei5eESVhhwPxShIucypubnt",iter:310000};
 let DATA=null,LIVE=null,liveOk=false,lastSig='',tab='team';
 let selHale=null,selNpc=null;
 const BLOBS={};
@@ -345,6 +345,9 @@ async function pollBase(){
 function startLive(){
   if(!DATA.api||!DATA.token)return;
   pollBase();
+  /* Primed once, like pollBase above it. Without this the muster waited for
+     the first 15s tick even when the page opened straight onto the NPCs tab. */
+  if(DATA.squads)pollSquads();
   setInterval(()=>{if(!document.hidden)pollBase()},10000);
   setInterval(()=>{if(!document.hidden&&tab==='npcs'&&DATA.squads)pollSquads()},15000);
 }
@@ -359,7 +362,12 @@ let SQ=null,sqErr='';
 async function pollSquads(){
   try{SQ=await api('/api/team/squads');sqErr=''}
   catch(e){sqErr=e.message}
-  if(tab==='squads')render();
+  /* The muster moved INSIDE the NPCs tab and this check did not follow it.
+     There is no 'squads' tab, so this never fired: pollSquads filled SQ and
+     nothing repainted, leaving "Reading the muster roll..." and NO Form a
+     squad button until some other event forced a render. Switching tab and
+     coming back was that event, which is exactly how it was reported. */
+  if(tab==='npcs')render();
 }
 async function sqCall(path,body){
   try{
@@ -747,7 +755,14 @@ function renderBase(m){
       <div class="hbox">⌂</div><div class="hlbl">${esc(h.name)}</div></div>`;
     (h.npcs||[]).forEach((k,j)=>{
       const c=(b.npcs||{})[k];if(!c)return;
-      const dx=p.x-26+(j%3)*26,dy=p.y+34+Math.floor(j/3)*26;
+      /* Scales with the canvas, exactly as map/dashboard.html does. These
+         offsets were authored against the default 1200x800 and turned into
+         a PERCENT of whatever canvas is live, so an uploaded ground plan
+         (Final Measure is 2500x2500) halved the gap and piled the dots up.
+         THERE ARE TWO COPIES OF THIS FORMULA -- this one and
+         map/dashboard.html -- and they must move together. */
+      const gx=26*(cv.w/1200),gy=26*(cv.h/800);
+      const dx=p.x-gx+(j%3)*gx,dy=p.y+gy*(34/26)+Math.floor(j/3)*gy;
       marks+=`<div class="bnpc${selNpc===k?' sel':''}" data-npc="${esc(k)}"
         title="${esc(c.name)} — ${esc(h.name)}"
         style="left:${pct(dx,'x')};top:${pct(dy,'y')}">${esc(initials(c.name))}</div>`;
